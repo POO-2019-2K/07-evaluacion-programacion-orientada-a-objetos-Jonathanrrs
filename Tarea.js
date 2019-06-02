@@ -29,9 +29,9 @@ export default class Tarea {
     }
     getDias() {
         let oneDay = 24 * 60 * 60 * 1000;
-        let oneYear = oneDay * 365;
-        let differenceMs = new Date() - this._fechaNac;
-        let edad = Math.trunc(differenceMs / oneYear);
+        let difference = this._fecha-new Date();
+        let edad = Math.trunc(difference / oneDay)+1;
+        console.log(edad)
         return edad;
     }
 }
