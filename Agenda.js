@@ -64,6 +64,26 @@ export default class Agenda {
         localStorage.setItem("tareas", JSON.stringify(this._tareas));
     }
 
+    _compararAlfa(a, b) {
+        if (a.nombre < b.nombre) {
+            return -1;
+        }
+        if (a.nombre > b.nombre) {
+            return 1;
+        }
+        return 0;
+    }
+    _alfa() {
+        this._tareas.sort(this._compararAlfa);
+    }
+    mostrarAlfa() {
+        this._tareas.sort(this._compararAlfa);
+        localStorage.setItem("tareas", JSON.stringify(this._tareas));
+        location.reload();
+    }
+
+
+
 
 
    
