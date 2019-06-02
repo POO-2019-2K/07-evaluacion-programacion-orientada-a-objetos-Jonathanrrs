@@ -20,9 +20,11 @@ export default class Agenda {
         let row = this._tablaAgenda.insertRow(-1);
         let cellNombre = row.insertCell(0);
         let cellFecha = row.insertCell(1);
+        let cellDias = row.insertCell(2);
    
         cellNombre.innerHTML = tarea.nombre;
         cellFecha.innerHTML = tarea.getFecha();
+        cellDias.innerHTML = tarea.getDias();
 
         let objTarea = {
             nombre: tarea.nombre,
