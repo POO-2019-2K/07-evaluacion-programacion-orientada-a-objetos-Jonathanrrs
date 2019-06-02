@@ -21,10 +21,12 @@ export default class Agenda {
         let cellNombre = row.insertCell(0);
         let cellFecha = row.insertCell(1);
         let cellDias = row.insertCell(2);
+        row.insertCell(3);
    
         cellNombre.innerHTML = tarea.nombre;
         cellFecha.innerHTML = tarea.getFecha();
         cellDias.innerHTML = tarea.getDias();
+        this._borrar(row,tarea);
 
         let objTarea = {
             nombre: tarea.nombre,
@@ -37,5 +39,33 @@ export default class Agenda {
         this._showInTable(tarea);
         localStorage.setItem("tareas", JSON.stringify(this._tareas));
     }
+
+    _borrar(row, tarea) {
+        let btnBorrar = document.createElement("input");
+        btnBorrar.type = "button";
+        btnBorrar.value = "Borrar";
+        btnBorrar.className = "btn btn-danger";
+        row.cells[3].innerHTML = "";
+        row.cells[3].appendChild(btnBorrar);
+        btnBorrar.addEventListener("click", () => {
+            this._borrarRow(tarea);
+            
+        });
+    }
+
+    _borrarRow(tarea) {
+        this._tareas = JSON.parse(localStorage.getItem("tareas"));
+        this._tareas.forEach((e, index) => {
+            if (e.nombre === tarea.nombre) {
+                this._tareas.splice(index, 1);
+            }
+        });
+        location.reload();
+        localStorage.setItem("tareas", JSON.stringify(this._tareas));
+    }
+
+
+
+   
    
 }
