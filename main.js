@@ -23,6 +23,9 @@ class Main {
                 agenda.addTarea(tarea);
             }
         });
+        document.querySelector("#btnAlfa").addEventListener("click",() => {
+            agenda.mostrarAlfa();
+        });
     }
 }
 let m = new Main();
