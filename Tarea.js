@@ -15,7 +15,7 @@ export default class Tarea {
             "Oct",
             "Nov",
             "Dic"
-          ];
+        ];
     }
     get nombre() {
         return this._nombre;
@@ -29,9 +29,24 @@ export default class Tarea {
     }
     getDias() {
         let oneDay = 24 * 60 * 60 * 1000;
-        let difference = this._fecha-new Date();
-        let edad = Math.trunc(difference / oneDay)+1;
+        let difference = this._fecha - new Date();
+        let edad = Math.trunc(difference / oneDay);
         console.log(edad)
-        return edad;
+        return edad+1;
     }
+
+    _getNumberAs2Digits(number) {
+        if(number < 10) {
+          return "0"+number;
+        }
+        return number;
+      }
+
+      getDiasForDate() {
+        let {fecha} = this;
+        let date = fecha.getFullYear() + "-" +  this._getNumberAs2Digits(fecha.getMonth()+1) + "-" + fecha.getDate();
+        return date;
+      }
+
+    
 }
