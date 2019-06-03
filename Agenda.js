@@ -22,11 +22,12 @@ export default class Agenda {
         let cellFecha = row.insertCell(1);
         let cellDias = row.insertCell(2);
         row.insertCell(3);
+        row.insertCell(4);
 
         cellNombre.innerHTML = tarea.nombre;
         cellFecha.innerHTML = tarea.getFecha();
         cellDias.innerHTML = tarea.getDias();
-        this._borrar(row, tarea);
+        this._addEditarYBorrar(row, tarea);
 
         let objTarea = {
             nombre: tarea.nombre,
@@ -50,20 +51,6 @@ export default class Agenda {
         localStorage.setItem("tareas", JSON.stringify(this._tareas));
     }
 
-
-    //Borrar fila//
-    _borrar(row, tarea) {
-        let btnBorrar = document.createElement("input");
-        btnBorrar.type = "button";
-        btnBorrar.value = "Borrar";
-        btnBorrar.className = "btn btn-danger";
-        row.cells[3].innerHTML = "";
-        row.cells[3].appendChild(btnBorrar);
-        btnBorrar.addEventListener("click", () => {
-            this._borrarRow(tarea);
-
-        });
-    }
 
     _borrarRow(tarea) {
         this._tareas = JSON.parse(localStorage.getItem("tareas"));
@@ -124,10 +111,87 @@ export default class Agenda {
         return foundAt;
     }
 
+    //Btn Editar
+    _addEditarYBorrar(row, tarea) {
+        let btnEdit = document.createElement("input");
+        btnEdit.type = "button";
+        btnEdit.value = "Editar";
+        btnEdit.className = "btn btn-success";
+        btnEdit.addEventListener("click", () => {
+            this._editRow(row, tarea);
+        });
+
+        let btnBorrar = document.createElement("input");
+        btnBorrar.type = "button";
+        btnBorrar.value = "Borrar";
+        btnBorrar.className = "btn btn-danger";
+        btnBorrar.addEventListener("click", () => {
+            this._borrarRow(tarea);
+        });
+
+        row.cells[3].innerHTML = "";
+        row.cells[3].appendChild(btnEdit);
+        row.cells[4].innerHTML = "";
+        row.cells[4].appendChild(btnBorrar);
 
 
+    }
 
+    _editRow(row, tarea) {
+        let iNombre = document.createElement("input");
+        iNombre.type = "text";
+        iNombre.value = tarea.nombre;
 
+        let iFecha = document.createElement("input");
+        iFecha.type = "date";
+        iFecha.value = tarea.getDiasForDate();
 
+        let btnGuardar = document.createElement("input");
+        btnGuardar.type = "button";
+        btnGuardar.value = "Guardar";
+        btnGuardar.className = "btn btn-success";
+        btnGuardar.addEventListener("click", () => {
+            let newTarea = {
+                nombre: iNombre.value,
+                fecha: iFecha.value
+            };
+            this._guardarEditar(row, tarea, newTarea)
+        });
+
+        let btnCancelar = document.createElement("input");
+        btnCancelar.type = "button";
+        btnCancelar.value = "Cancelar";
+        btnCancelar.className = "btn btn-danger";
+        btnCancelar.addEventListener("click", () => {
+            this._cancelarEditar(row, tarea);
+        });
+
+        row.cells[0].innerHTML = "";
+        row.cells[0].appendChild(iNombre);
+
+        row.cells[1].innerHTML = "";
+        row.cells[1].appendChild(iFecha);
+
+        row.cells[3].innerHTML = "";
+        row.cells[3].appendChild(btnGuardar);
+
+        row.cells[4].innerHTML = "";
+        row.cells[4].appendChild(btnCancelar);
+    }
+
+    _guardarEditar(row, tarea, newTarea) {
+        let pos = this._findTarea(tarea.nombre);
+        this._tareas[pos] = newTarea;
+        localStorage.setItem("tareas", JSON.stringify(this._tareas));
+        location.reload();
+        this._cancelarEditar(row, new Tarea(newTarea));
+
+    }
+
+    _cancelarEditar(row, tarea) {
+        row.cells[0].innerHTML = tarea.nombre;
+        row.cells[1].innerHTML = tarea.getFecha();
+        this._addEditarYBorrar(row, tarea);
+    }
 
 }
