@@ -24,7 +24,7 @@ export default class Tarea {
         return this._fecha;
     }
     getFecha() {
-        let fecha = this._fecha.getDate() + "/" + this._mes[this._fecha.getMonth()] + "/" + this._fecha.getFullYear();
+        let fecha = this._getNumberAs2Digits(this._fecha.getDate()+1) + "/" + this._mes[this._fecha.getMonth()] + "/" + this._fecha.getFullYear();
         return fecha;
     }
     getDias() {
@@ -32,7 +32,7 @@ export default class Tarea {
         let difference = this._fecha - new Date();
         let edad = Math.trunc(difference / oneDay);
         console.log(edad)
-        return edad+1;
+        return edad+2;
     }
 
     _getNumberAs2Digits(number) {
@@ -44,7 +44,7 @@ export default class Tarea {
 
       getDiasForDate() {
         let {fecha} = this;
-        let date = fecha.getFullYear() + "-" +  this._getNumberAs2Digits(fecha.getMonth()+1) + "-" + fecha.getDate();
+        let date = fecha.getFullYear() + "-" +  this._getNumberAs2Digits(fecha.getMonth()+1) + "-" + this._getNumberAs2Digits(fecha.getDate()+1);
         return date;
       }
 
