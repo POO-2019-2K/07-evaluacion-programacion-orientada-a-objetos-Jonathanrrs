@@ -183,7 +183,7 @@ export default class Agenda {
         let pos = this._findTarea(tarea.nombre);
         this._tareas[pos] = newTarea;
         localStorage.setItem("tareas", JSON.stringify(this._tareas));
-      
+        location.reload();
         this._cancelarEditar(row, new Tarea(newTarea));
 
     }
