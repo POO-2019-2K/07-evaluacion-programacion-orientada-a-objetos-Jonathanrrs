@@ -1,7 +1,7 @@
 export default class Tarea {
     constructor(tarea) {
         this._nombre = tarea.nombre.toUpperCase();
-        this._fecha = tarea.fecha;
+        this._fecha = new Date(tarea.fecha);
         this._mes = [
             "Ene",
             "Feb",
