@@ -5,7 +5,7 @@
     letter-spacing: 18px;
     background-color: rgb(241, 237, 237);
     text-align: center;
-    background-image: url(https://yiminshum.com/wp-content/uploads/2017/07/Checklist-de-tareas-diarias-en-los-medios-digitales-producto.png);
+    
   }
   p {
     font-family: 'Cormorant Unicase', serif;
@@ -38,7 +38,121 @@
     border-radius: 15px;
     margin: 4px auto;
   }
-  .fas, .far {
+  #sim {
     margin-right: 5px;
     font-size: 20px;
   }
+
+/* Botones de orden */ 
+.s {
+  position: absolute;
+  bottom: 18%;
+  left: 39%;
+  transform: translate(-50%, -50%);
+  background: #2f3640;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+  box-sizing: initial;
+ }
+ 
+ .s:hover > .s-txt {
+  width: 199px;
+  padding: 0 6px;
+ }
+ 
+ .s:hover > .se-btn {
+  background: black;
+  color: rgb(0, 0, 0);
+ }
+ 
+ .se-btn {
+  color: #e84118;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2f3640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  color: white;
+  cursor: pointer;
+ }
+ 
+ .se-btn > i {
+  font-size: 30px;
+  color: white;
+ }
+ 
+ .s-txt {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+  font-weight: bold;
+ }
+
+/* boton2 */
+ .search-box2 {
+  position: absolute;
+  bottom:18%;
+  left: 27%;
+  transform: translate(-50%, -50%);
+  background: #2f3640;
+  height: 40px;
+  border-radius: 40px;
+  padding: 10px;
+  box-sizing: initial;
+ }
+ 
+ .search-box2:hover > .search-txt2 {
+  width: 199px;
+  padding: 0 6px;
+ }
+ 
+ .search-box2:hover > .search-btn2 {
+  background: black;
+  color: rgb(0, 0, 0);
+ }
+ 
+ .search-btn2 {
+  color: #e84118;
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #2f3640;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.4s;
+  color: white;
+  cursor: pointer;
+ }
+ 
+ .search-btn2 > i {
+  font-size: 30px;
+  color: white;
+ }
+ 
+ .search-txt2 {
+  border: none;
+  background: none;
+  outline: none;
+  float: left;
+  padding: 0;
+  color: white;
+  font-size: 16px;
+  transition: 0.4s;
+  line-height: 40px;
+  width: 0px;
+  font-weight: bold;
+ }
