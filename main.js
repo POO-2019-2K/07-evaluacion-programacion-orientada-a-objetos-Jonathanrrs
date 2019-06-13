@@ -26,6 +26,9 @@ class Main {
         document.querySelector("#btnAlfa").addEventListener("click",() => {
             agenda.mostrarAlfa();
         });
+        document.querySelector("#btnNum").addEventListener("click", () => {
+            agenda.mostrarNum();
+        });
     }
 }
 let m = new Main();
