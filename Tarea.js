@@ -22,31 +22,27 @@ export default class Tarea {
     }
     get fecha() {
         return this._fecha;
+    
     }
     getFecha() {
-        let fecha = this._getNumberAs2Digits(this._fecha.getDate()+1) + "/" + this._mes[this._fecha.getMonth()] + "/" + this._fecha.getFullYear();
+        let fecha = (this._fecha.getDate()) + "-" + this._mes[this._fecha.getMonth()] + "-" + this._fecha.getFullYear();
         return fecha;
     }
     getDias() {
         let oneDay = 24 * 60 * 60 * 1000;
         let difference = this._fecha - new Date();
         let edad = Math.trunc(difference / oneDay);
-        console.log(edad)
-        return edad+2;
+        return edad+1;
     }
 
-    _getNumberAs2Digits(number) {
-        if(number < 10) {
-          return "0"+number;
-        }
-        return number;
-      }
 
       getDiasForDate() {
         let {fecha} = this;
-        let date = fecha.getFullYear() + "-" +  this._getNumberAs2Digits(fecha.getMonth()+1) + "-" + this._getNumberAs2Digits(fecha.getDate()+1);
+        console.log(fecha);
+        let date = fecha.getFullYear() + "-" + (fecha.getMonth()+1) + "-" + (fecha.getDate());
         return date;
       }
+      
 
     
 }
