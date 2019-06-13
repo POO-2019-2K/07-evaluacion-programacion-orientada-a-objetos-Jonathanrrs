@@ -2,7 +2,7 @@ import Tarea from "./Tarea.js";
 export default class Agenda {
     constructor(tablaAgenda) {
         this._tablaAgenda = tablaAgenda;
-        this._tareas = [];ñ
+        this._tareas = [];
         this._initTables();
         //localStorage.removeItem("tareas");
     }
