@@ -2,7 +2,7 @@ import Tarea from "./Tarea.js";
 export default class Agenda {
     constructor(tablaAgenda) {
         this._tablaAgenda = tablaAgenda;
-        this._tareas = [];
+        this._tareas = [];ñ
         this._initTables();
         //localStorage.removeItem("tareas");
     }
@@ -38,6 +38,11 @@ export default class Agenda {
 
     //Agregar tarea
     addTarea(tarea) {
+        Swal.fire(
+            'Buen Trabajo!',
+            'Tu tarea ha sido agregada',
+            'success'
+          )
         let found = this._findTarea(tarea.nombre);
         if (found >= 0) {
             Swal.fire({
@@ -56,10 +61,27 @@ export default class Agenda {
         this._tareas = JSON.parse(localStorage.getItem("tareas"));
         this._tareas.forEach((e, index) => {
             if (e.nombre === tarea.nombre) {
-                this._tareas.splice(index, 1);
+                this._tareas.splice(index, 1); 
             }
         });
-        location.reload();
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: "Este cambio es irreversible!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar!'
+          }).then((result) => {
+            if (result.value) {
+              Swal.fire(
+                'Eliminado!',
+                'Tu tarea ha sido eliminada',
+                'success'
+              )
+            }
+          })
+          setTimeout("location.reload()", 3500);
         localStorage.setItem("tareas", JSON.stringify(this._tareas));
     }
     //Ordenar alfabeticamente//
@@ -119,6 +141,7 @@ export default class Agenda {
         btnEdit.className = "btn btn-success";
         btnEdit.addEventListener("click", () => {
             this._editRow(row, tarea);
+            
         });
 
         let btnBorrar = document.createElement("input");
@@ -127,6 +150,7 @@ export default class Agenda {
         btnBorrar.className = "btn btn-danger";
         btnBorrar.addEventListener("click", () => {
             this._borrarRow(tarea);
+            
         });
 
         row.cells[3].innerHTML = "";
@@ -151,11 +175,13 @@ export default class Agenda {
         btnGuardar.value = "Guardar";
         btnGuardar.className = "btn btn-success";
         btnGuardar.addEventListener("click", () => {
+        let fechaNew = iFecha.value.split("-");
             let newTarea = {
                 nombre: iNombre.value,
-                fecha: iFecha.value
+                fecha: new Date(fechaNew[0], fechaNew[1]-1, fechaNew[2])
+                
             };
-            this._guardarEditar(row, tarea, newTarea)
+            this._guardarEditar(row, tarea, newTarea);
         });
 
         let btnCancelar = document.createElement("input");
@@ -185,6 +211,7 @@ export default class Agenda {
         localStorage.setItem("tareas", JSON.stringify(this._tareas));
         location.reload();
         this._cancelarEditar(row, new Tarea(newTarea));
+    
 
     }
 
